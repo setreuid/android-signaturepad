@@ -93,6 +93,9 @@ compile 'com.github.gcacace:signature-pad:1.2.1'
  * `getSignatureBitmap()` - Bitmap 형태로 서명 이미지를 얻습니다.
  * `getTransparentSignatureBitmap()` - 배경이 투명한 서명 이미지를 Bitmap 형태로 얻습니다.
  * `getSignatureSvg()` - 벡터 서명 이미지를 얻습니다. 이미지 형태는 Svg 입니다.
+ 
+5. 추가된 메소드입니다.
+ * `setSignatureBitmapFromURL(String)` - HTTP Url에서 서명 이미지를 받아 서명 뷰 객체에 출력합니다.
 
 ## XML 데이터 바인딩(Data Binding)
 
