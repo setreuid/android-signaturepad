@@ -46,7 +46,7 @@ compile 'com.github.setreuid:android-signaturepad:1.2.1.1'
 
 *`/SignaturePad-Example` 프로젝트를 참고하시면 더 다양한 예제와 상세한 사용법을 확인하실 수 있습니다.*
 
-1. `SignaturePad` 뷰 객체를 레이아웃에 추가해주세요.
+1. `SignaturePad` 뷰를 레이아웃에 추가해주세요.
 ```xml
  <com.github.gcacace.signaturepad.views.SignaturePad
      xmlns:android="http://schemas.android.com/apk/res/android"
