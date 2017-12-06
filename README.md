@@ -34,11 +34,17 @@ compile 'com.github.setreuid:android-signaturepad:1.2.1.1'
 
 `pom.xml` 파일에 아래와 같이 추가해주세요:
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+...
 <dependency>
-  <groupId>com.github.gcacace</groupId>
-  <artifactId>signature-pad</artifactId>
-  <version>1.2.1</version>
-  <type>aar</type>
+    <groupId>com.github.setreuid</groupId>
+    <artifactId>android-signaturepad</artifactId>
+    <version>1.2.1.1</version>
 </dependency>
 ```
 
