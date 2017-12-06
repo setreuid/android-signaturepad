@@ -1,37 +1,38 @@
 Android Signature Pad
 ====================
 
-Android Signature Pad is an Android library for drawing smooth signatures. It uses variable width Bézier curve interpolation based on [Smoother Signatures](http://corner.squareup.com/2012/07/smoother-signatures.html) post by [Square](https://squareup.com).
+Android Signature Pad 라이브러리는 안드로이드에서 필기 서명을 할 수 있도록 합니다.
+[Square](https://squareup.com)님의 포스팅 [Smoother Signatures](http://corner.squareup.com/2012/07/smoother-signatures.html)을 참조한 가변 폭 베지어 곡선 보간법을 사용합니다.
 
 ![Screenshot](https://github.com/gcacace/android-signaturepad/raw/master/header.png)
 
-## Features
- * Bézier implementation for a smoother line
- * Variable point size based on velocity
- * Customizable pen color and size
- * Bitmap and SVG support
- * Data Binding
+## 특징
+ * 베지어 곡선 보간법을 이용한 부드러운 곡선
+ * 누르는 압력 및 속도에 따른 선의 폭 변화
+ * 필기 펜의 색과 너비 커스터마이징
+ * Bitmap과 SVG 형식을 지원
+ * 데이터 바인딩(Data Binding on Android XML)
 
-## Installation
+## 설치
 
-Latest version of the library can be found on Maven Central.
+Maven Central을 통해 최신 배포판을 사용하실수 있습니다.
 
-### For Gradle users
+### Gradle
 
-Open your `build.gradle` and make sure that Maven Central repository is declared into `repositories` section:
+`build.gradle` 파일을 열고, `repositories` 항목에 추가하세요:
 ```gradle
-   repositories {
-       mavenCentral()
-   }
+repositories {
+    mavenCentral()
+}
 ```
-Then, include the library as dependency:
+그리고 dependency에 추가해주세요:
 ```gradle
 compile 'com.github.gcacace:signature-pad:1.2.1'
 ```
 
-### For Maven users
+### Maven
 
-Add this dependency to your `pom.xml`:
+`pom.xml` 파일에 아래와 같이 추가해주세요:
 ```xml
 <dependency>
   <groupId>com.github.gcacace</groupId>
@@ -41,11 +42,11 @@ Add this dependency to your `pom.xml`:
 </dependency>
 ```
 
-## Usage
+## 사용법
 
-*Please see the `/SignaturePad-Example` app for a more detailed code example of how to use the library.*
+*`/SignaturePad-Example` 프로젝트를 참고하시면 더 다양한 예제와 상세한 사용법을 확인하실 수 있습니다.*
 
-1. Add the `SignaturePad` view to the layout you want to show.
+1. `SignaturePad` 뷰 객체를 레이아웃에 추가해주세요.
 ```xml
  <com.github.gcacace.signaturepad.views.SignaturePad
      xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,46 +58,45 @@ Add this dependency to your `pom.xml`:
      />
 ```
 
-2. Configure attributes.
- * `penMinWidth` - The minimum width of the stroke (default: 3dp).
- * `penMaxWidth` - The maximum width of the stroke (default: 7dp).
- * `penColor` - The color of the stroke (default: Color.BLACK).
- * `velocityFilterWeight` - Weight used to modify new velocity based on the previous velocity (default: 0.9).
- * `clearOnDoubleClick` - Double click to clear pad (default: false)
+2. 설정값은 아래와 같습니다.
+ * `penMinWidth` - 최소 선 굵기 (default: 3dp).
+ * `penMaxWidth` - 최대 선 굵기 (default: 7dp).
+ * `penColor` - 필기 펜 색상 (default: Color.BLACK).
+ * `velocityFilterWeight` - 속도 가중치 값 (default: 0.9).
+ * `clearOnDoubleClick` - 뷰 객체를 두번 터치할때 뷰를 초기화 하는지에 대한 여부 (default: false)
 
-3. Configure signature events listener
+3. 서명 객체의 이벤트 핸들링
 
- An `OnSignedListener` can be set on the view:
+ `OnSignedListener` 예제입니다:
  ```java
-
  mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
  mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
       @Override
       public void onStartSigning() {
-          //Event triggered when the pad is touched
+          // 서명 뷰 객체가 터치되어 그려지기 시작할때
       }
 
      @Override
      public void onSigned() {
-         //Event triggered when the pad is signed
+         // 터치가 끝났을때
      }
 
      @Override
      public void onClear() {
-         //Event triggered when the pad is cleared
+         // 서명 뷰 객체가 초기화(Clear)될 때
      }
  });
  ```
 
-4. Get signature data
- * `getSignatureBitmap()` - A signature bitmap with a white background.
- * `getTransparentSignatureBitmap()` - A signature bitmap with a transparent background.
- * `getSignatureSvg()` - A signature Scalable Vector Graphics document.
+4. 서명 뷰 객체에서 이미지를 출력하는 메소드입니다.
+ * `getSignatureBitmap()` - Bitmap 형태로 서명 이미지를 얻습니다.
+ * `getTransparentSignatureBitmap()` - 배경이 투명한 서명 이미지를 Bitmap 형태로 얻습니다.
+ * `getSignatureSvg()` - 벡터 서명 이미지를 얻습니다. 이미지 형태는 Svg 입니다.
 
-## Data Binding
+## XML 데이터 바인딩(Data Binding)
 
-The `SignaturePad` view has custom Data Binding attribute setters for all the listener events:
+`SignaturePad` 뷰 객체에 XML 속성으로 이벤트 핸들링이 가능합니다:
 
 ```xml
  <com.github.gcacace.signaturepad.views.SignaturePad
@@ -110,20 +110,23 @@ The `SignaturePad` view has custom Data Binding attribute setters for all the li
      bind:onClear="@{activity.onClear}" />
 ```
 
-## Cordova Plugin
+## Cordova 플러그인
 
-Thanks to [netinhoteixeira](https://github.com/netinhoteixeira/), there is a Cordova plugin using that library.
-Please refer to https://github.com/netinhoteixeira/cordova-plugin-signature-view.
+[netinhoteixeira](https://github.com/netinhoteixeira/)님 감사합니다.
+우리의 라이브러리를 사용한 Cordova 플러그인입니다.
+https://github.com/netinhoteixeira/cordova-plugin-signature-view 링크를 확인하세요.
 
-## NativeScript Plugin
-Thanks to [bradmartin](https://github.com/bradmartin), there is a NativeScript plugin.
-Please refer to [https://github.com/bradmartin/nativescript-signaturepad](https://github.com/bradmartin/nativescript-signaturepad).
+## NativeScript 플러그인
+[bradmartin](https://github.com/bradmartin)님 감사합니다.
+NativeScript 플러그인입니다.
+[https://github.com/bradmartin/nativescript-signaturepad](https://github.com/bradmartin/nativescript-signaturepad) 링크를 확인하세요.
 
-## Caveats
+## 주의사항
 
-Currently doesn't support screen rotations. Pull requests are welcome!
+현재 화면 돌림 상황에서 정상 작동을 기대하기 어렵습니다.
+누군가 풀 리퀘스트(Pull Request) 해주시면 감사하겠습니다!
 
-## License
+## 라이센스
 
     Copyright 2014-2016 Gianluca Cacace
 
