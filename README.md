@@ -22,12 +22,12 @@ Maven Central을 통해 최신 배포판을 사용하실수 있습니다.
 `build.gradle` 파일을 열고, `repositories` 항목에 추가하세요:
 ```gradle
 repositories {
-    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 ```
 그리고 dependency에 추가해주세요:
 ```gradle
-compile 'com.github.gcacace:signature-pad:1.2.1'
+compile 'com.github.setreuid:android-signaturepad:1.2.1.1'
 ```
 
 ### Maven
