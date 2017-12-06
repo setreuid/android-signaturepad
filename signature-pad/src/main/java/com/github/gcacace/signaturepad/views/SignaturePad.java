@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -24,7 +25,10 @@ import com.github.gcacace.signaturepad.utils.TimedPoint;
 import com.github.gcacace.signaturepad.view.ViewCompat;
 import com.github.gcacace.signaturepad.view.ViewTreeObserverCompat;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SignaturePad extends View {
@@ -268,6 +272,19 @@ public class SignaturePad extends View {
         canvas.drawColor(Color.WHITE);
         canvas.drawBitmap(originalBitmap, 0, 0, null);
         return whiteBgBitmap;
+    }
+
+    public void setSignatureBitmapFromURL(String targetUrl) {
+        try
+        {
+            URL url = new URL(targetUrl);
+            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            this.setSignatureBitmap(bitmap);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void setSignatureBitmap(final Bitmap signature) {
